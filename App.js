@@ -13,7 +13,7 @@ function App() {
   const [filteredData, setFilteredData] = useState([]);
   const [data, setData] = useState([]);
   const [selectedCity, setSelectedCity] = useState("Ulan Bator"); 
-  const [weather,SetWeather] = useState(["current.temp_c:0,current.condition.text:,current.last_updated:"])
+  const [weather,SetWeather] = useState([])
   const apiKey = 'f8dede5e4bc144e897022321251501'
 
   const handleInput = (event) => {
@@ -65,9 +65,8 @@ function App() {
         );
         const result = await response.json();
         SetWeather(result); 
-        console.log(weather)
-        
-      
+        console.log(weather.forecast.forecastday[0].day.mintemp_c);
+             
         
       } catch (error) {
         console.log("Error fetching weather:", error);
@@ -76,6 +75,11 @@ function App() {
 
     getWeather();
   }, [selectedCity]);
+
+
+
+
+
   return (
     <div className="h-screen w-screen flex justify-center items-center">
      <img src={circle1} className='absolute  top-[200px] left-[350px]' />
@@ -137,7 +141,7 @@ function App() {
       <div className="h-full w-3/6 bg-customwhite flex justify-center items-center  ">
         <div className="w-[414px] h-[832px] bg-White rounded-[44px] backdrop-blur-24 flex flex-col justify-center gap-[30px] absolute">
       
-          {weather &&  (
+          {weather.length !==0 &&  (
             <div className="text-[48px] text-black h-[200px] flex flex-col items-start">
               <div className='p-[40px] flex flex-col items-start'>
               <p className="text-center text-[18px] text-Dategray h-[25px]">
@@ -150,10 +154,10 @@ function App() {
              <div className='w-full h-[264px] flex justify-center'>
           <img src={sun} className='w-[264px]'/>
         </div>
-        {weather && (
+        {weather.length !==0 && (
             <div className="text-center mt-4 text-[144px] text-black flex flex-col items-start w-full p-[48px] ">
          <div className=' flex flex-col items-start '>
-              <p>    {weather.current.temp_c}    </p>
+              <p>    {weather.forecast.forecastday[0].day.maxtemp_c}   </p>
               <p className='text-[24px] text-customyellow'>{weather.current.condition.text}</p>
               </div>
             </div>
@@ -167,7 +171,7 @@ function App() {
       <div className="h-full w-3/6 bg-customDark flex justify-center items-center ">
         <div className="w-[414px] h-[832px] bg-Dark rounded-[44px] backdrop-blur-lg flex flex-col justify-center gap-[30px]">
       
-          {weather &&  (
+          {weather.length !==0 &&  (
             <div className="text-[48px] text-black h-[200px] flex flex-col items-start">
               <div className='p-[40px] flex flex-col items-start'>
               <p className="text-center text-[18px] text-Dategray h-[25px] ">
@@ -180,10 +184,10 @@ function App() {
              <div className='w-full h-[264px] flex justify-center'>
           <img src={moon} className='w-[264px]'/>
         </div>
-        {weather && (
+        {weather.length !==0 && (
             <div className="text-center mt-4 text-[144px] text-black flex flex-col items-start w-full p-[48px] ">
          <div className='flex flex-col items-start '>
-              <p className='text-white'>    {weather.current.temp_c}    </p>
+              <p className='text-white'>    {weather.forecast.forecastday[0].day.mintemp_c}    </p>
               <p className='text-[24px] text-custompink'>{weather.current.condition.text}</p>
               </div>
             </div>
