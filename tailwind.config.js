@@ -9,6 +9,9 @@ module.exports = {
         Dark: 'rgba(17, 24, 39, 0.75)',
         White:'rgba(255, 255, 255, 0.75)',
         bordercolor: '#111827',
+        Dategray:'#9CA3AF',
+        custompink:'#777CCE',
+        customyellow:'#FF8E27'
 
 
       },
@@ -16,4 +19,3 @@ module.exports = {
   },
   plugins: [],
 }
-
