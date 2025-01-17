@@ -11,7 +11,11 @@ module.exports = {
         bordercolor: '#111827',
         Dategray:'#9CA3AF',
         custompink:'#777CCE',
-        customyellow:'#FF8E27'
+        customyellow:'#FF8E27',
+        gradDark:'#111827',
+        gradDark2:'#6B7280',
+        gradwhite:'#F9FAFB',
+        
 
 
       },
