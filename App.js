@@ -31,14 +31,11 @@ function App() {
       return;
     }
 
-    const filtered = data
-      .filter((item) => {
-        return item.cities.some((city) =>
-           city.toLowerCase().includes(value.toLowerCase())
-       
-        );
-      })
-      .slice(0, 5);
+    const filtered = data.
+    flatMap((item)=>item.cities)
+    .filter((city)=>city.toLowerCase().startsWith(value.toLowerCase()))
+    .slice(0, 5)
+    
 
     setFilteredData(filtered);
   };
@@ -56,6 +53,10 @@ function App() {
     setSelectedCity(city); 
     setInput(""); 
     setFilteredData([]);
+    console.log(filteredData);
+    
+   
+    
 
 
   
@@ -125,7 +126,7 @@ if (cond === "Sunny") {
           <div className="w-[340px] h-[340px] border-solid border-opacity-10  absolute flex justify-center items-center gap-4 rounded-full">
             <div className='w-[140px] h-[450px] absolute flex left-1/2 bg-customwhite'>
             
-            <div className='w-[170px] h-[170px] bg-black rounded-full absolute top-[140px] left-[50px]'></div>
+            <div className='w-[170px] h-[170px] bg-customwhite rounded-full absolute top-[140px] left-[50px]'></div>
             <div className='w-[140px] h-[140px] absolute bottom-0 overflow-hidden '>
               <div className='w-[280px] h-[280px] bg-customDark rounded-full'></div>
             </div>
@@ -150,40 +151,33 @@ if (cond === "Sunny") {
             <img src={search} alt="Search Icon" />
           </div>
           <input
-            className="h-[44px] w-[455px]"
+            className="h-[44px] w-[455px] outline-none"
             onChange={handleInput}
             value={input}
             placeholder="Search for cities..."
+           
           />
         </div>
 
         {filteredData.length > 0 && (
-          <ul className="mt-4 bg-white w-[567px] p-4 rounded-lg shadow-lg absolute z-100">
-            {filteredData.map((item, index) => (
-              <li key={index} className="p-2 border-b last:border-none z-100">
-                <strong>{item.country}:</strong>{" "}
-                {item.cities
-                  .filter((city) =>
-                    city.toLowerCase().includes(input.toLowerCase())
-                  )
-                  .map((city, i) => (
-                    <span
-                      key={i}
-                      className="cursor-pointer hover:underline"
-                      onClick={() => handleCityClick(city)}
-                  
-                      
-                    >
-                      {city}
-                    
-                    </span>
-                  
-                  ))}
-              </li>
-            ))}
-            
-          </ul>
-        )}
+  <ul className="mt-4 bg-white w-[567px] p-4 rounded-[10px] shadow-lg absolute z-1 00">
+    {filteredData.map((city, index) => {
+     
+      const country = data.find((item) =>
+        item.cities.includes(city)
+      );
+
+      return (
+        <li key={index} className="p-2 border-b last:border-none cursor-pointer "  onClick={() => handleCityClick(city)}>
+          <strong>{country.country}</strong>:{" "}
+        <span>
+            {city}
+          </span>
+        </li>
+      );
+    })}
+  </ul>
+)}
       
       </div>
 
