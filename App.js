@@ -8,6 +8,7 @@ import moon from "./img/icon2.png";
 import circle1 from './img/circle1.svg';
 import circle2 from './img/circle2.svg'
 import cloud from "./img/Clouds.png";
+import loc from "./img/Pin.svg";
 
 function App() {
   const [input, setInput] = useState(""); 
@@ -160,7 +161,7 @@ if (cond === "Sunny") {
         </div>
 
         {filteredData.length > 0 && (
-  <ul className="mt-4 bg-white w-[567px] p-4 rounded-[10px] shadow-lg absolute z-1 00">
+  <ul className="mt-4 bg-white w-[567px] p-4 rounded-[10px] shadow-lg absolute z-100">
     {filteredData.map((city, index) => {
      
       const country = data.find((item) =>
@@ -168,11 +169,15 @@ if (cond === "Sunny") {
       );
 
       return (
-        <li key={index} className="p-2 border-b last:border-none cursor-pointer "  onClick={() => handleCityClick(city)}>
+        <li key={index} className="p-2 border-b last:border-none cursor-pointer flex items-center gap-[20px] hover:bg-gray-100"  onClick={() => handleCityClick(city)}>
+          <div> <img src={loc}  /></div>
+          <div>
+          
           <strong>{country.country}</strong>:{" "}
-        <span>
-            {city}
-          </span>
+          {city}
+          </div>
+          
+         
         </li>
       );
     })}
@@ -181,7 +186,7 @@ if (cond === "Sunny") {
       
       </div>
 
-      <div className="h-full w-3/6 bg-customwhite flex justify-center items-center  ">
+      <div className="h-full w-3/6 bg-customwhite flex justify-center items-center ">
         <div className="w-[414px] h-[832px] bg-White rounded-[44px] backdrop-blur-24 flex flex-col justify-center gap-[30px] absolute">
       
           {weather.length !==0 &&  (
@@ -211,7 +216,7 @@ if (cond === "Sunny") {
      
       </div>
 
-      <div className="h-full w-3/6 bg-customDark flex justify-center items-center ">
+      <div className="h-full w-3/6 bg-customDark flex justify-center items-center  ">
         <div className="w-[414px] h-[832px] bg-Dark rounded-[44px] backdrop-blur-lg flex flex-col justify-center gap-[30px]">
       
           {weather.length !==0 &&  (
